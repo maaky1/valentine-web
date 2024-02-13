@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Homepage</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
+    <style>
+        /* CSS untuk membuat layar penuh */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        /* CSS untuk menempatkan GIF di tengah layar */
+        .centered-gif {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px; /* Sesuaikan dengan jarak yang diinginkan */
+        }
+        /* CSS untuk tombol */
+        .btn-container {
+            text-align: center;
+            margin-top: 20px; /* Sesuaikan dengan jarak yang diinginkan */
+        }
+        /* CSS untuk menyembunyikan konten utama selama loading */
+        .main-content {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg d-flex justify-content-center align-items-center">
+    <!-- Animasi loading -->
+    <div class="container-fluid h-100" id="loading">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <img id="loading-gif" class="centered-gif" src="img/dudu-ride.gif" alt="Loading..." style="width: 400px; height: 400px;">
+                <h1 id="loading-text1">==================</h1>
+                <h1 id="loading-text2">Otw ketemu dd Onya</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konten utama -->
+    <div class="container-fluid h-100 main-content" id="content">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <img class="centered-gif" src="img/hi-waving-unscreen.gif" alt="Animated GIF">
+                <h1>Maukah dd menjadi Valentineku ?</h1>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-success">Mw</button>
+                    <button type="button" class="btn btn-danger">Tidak</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"
+    ></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"
+    ></script>
+
+    <script>
+        // Fungsi untuk menampilkan konten utama dan menyembunyikan animasi loading
+        function showContent() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
+
+        // Fungsi untuk menampilkan animasi loading
+        function showLoading() {
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading-gif').src="img/shakespaw.gif";
+            document.getElementById('loading-text1').innerText = '==================';
+            document.getElementById('loading-text2').innerText = 'Ini buat dd Onya';
+            setTimeout(redirectToNextPage, 2550); // Redirect setelah 3 detik
+        }
+
+        // Fungsi untuk melakukan redirect ke halaman selanjutnya
+        function redirectToNextPage() {
+            window.location.href = "success.html";
+        }
+
+        var dangerBtn = document.querySelector(".btn-danger");
+        var successBtn = document.querySelector(".btn-success");
+        var clickCount = 0;
+
+        successBtn.addEventListener("click", function() {
+            showLoading(); // Memanggil fungsi untuk menampilkan loading sebelum redirect
+        });
+    
+        dangerBtn.addEventListener("click", function() {
+            var successBtn = document.querySelector(".btn-success");
+            var computedStyle = window.getComputedStyle(successBtn);
+            var currentSize = parseFloat(computedStyle.fontSize);
+            var newSize = currentSize * 1.3; // increase size by 10%
+            successBtn.style.fontSize = newSize + "px";
+            clickCount++;
+            
+            if (clickCount >= 7) {
+                successBtn.innerText = "Wleee cuma bisa milih Mw";
+                dangerBtn.style.display = "none";
+            }
+
+            switch (clickCount) {
+                case 1:
+                    dangerBtn.innerText = "Kamu yakin ?";
+                    break;
+                case 2:
+                    dangerBtn.innerText = "Beneran ?";
+                    break;
+                case 3:
+                    dangerBtn.innerText = "Coba pikir ulang !";
+                    break;
+                case 4:
+                    dangerBtn.innerText = "Kesempatan Terakhir.";
+                    break;
+                case 5:
+                    dangerBtn.innerText = "Yakin ?";
+                    break;
+                case 6:
+                    dangerBtn.innerText = "Kamu akan menyesal.";
+                    break;
+                default:
+                    dangerBtn.style.display = "none";
+            }
+        });
+
+        // Panggil fungsi showContent setelah 3 detik (misalnya)
+        setTimeout(showContent, 3000);
+    </script>
+</html>
